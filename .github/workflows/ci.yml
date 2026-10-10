@@ -35,6 +35,23 @@ jobs:
         shell: pwsh
         run: msbuild ./ViewMyInvoice/ViewMyInvoice.csproj /r
 
+  android_build:
+    name: Build Android (Release)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install Dependencies
+        timeout-minutes: ${{ fromJSON(env.STEP_TIMEOUT_MINUTES) }}
+        uses: "./.github/steps/install_dependencies"
+        with:
+          target-platform: android
+
+      - name: Build ViewMyInvoice (Android, Release)
+        run: dotnet build ./ViewMyInvoice/ViewMyInvoice.csproj -f net10.0-android -c Release
+
   unit_test:
     name: Unit Tests
     runs-on: windows-latest

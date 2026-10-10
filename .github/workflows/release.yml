@@ -1,0 +1,221 @@
+name: Release
+
+# Manual trigger. Builds every platform, waits for approval on the "release" environment,
+# then tags the commit, creates the GitHub release and attaches the artifacts.
+# The version comes from the latest vX.Y.Z tag; no commit is pushed.
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Which part of the version to bump'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  STEP_TIMEOUT_MINUTES: 60
+  PROJECT: ./ViewMyInvoice/ViewMyInvoice.csproj
+
+jobs:
+  version:
+    name: Compute version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.next.outputs.version }}
+      tag: ${{ steps.next.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Compute next version
+        id: next
+        shell: bash
+        run: |
+          latest=$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -n 1)
+          if [ -z "$latest" ]; then
+            next="1.0.0"
+          else
+            IFS='.' read -r major minor patch <<< "${latest#v}"
+            case "${{ inputs.bump }}" in
+              major) major=$((major + 1)); minor=0; patch=0 ;;
+              minor) minor=$((minor + 1)); patch=0 ;;
+              *)     patch=$((patch + 1)) ;;
+            esac
+            next="$major.$minor.$patch"
+          fi
+          echo "Latest tag: ${latest:-<none>} -> next: v$next"
+          echo "version=$next" >> "$GITHUB_OUTPUT"
+          echo "tag=v$next" >> "$GITHUB_OUTPUT"
+
+  build_windows:
+    name: Build Windows (${{ matrix.rid }})
+    needs: version
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        rid: [win-x64, win-x86, win-arm64]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Dependencies
+        timeout-minutes: ${{ fromJSON(env.STEP_TIMEOUT_MINUTES) }}
+        uses: "./.github/steps/install_dependencies"
+
+      - name: Publish
+        shell: pwsh
+        run: >
+          dotnet publish ${{ env.PROJECT }} -f net10.0-desktop -c Release -r ${{ matrix.rid }}
+          --self-contained -o publish
+          -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
+          -p:ApplicationVersion=${{ github.run_number }}
+
+      - name: Package
+        shell: pwsh
+        run: Compress-Archive -Path publish/* -DestinationPath ViewMyInvoice-${{ needs.version.outputs.tag }}-${{ matrix.rid }}.zip
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: windows-${{ matrix.rid }}
+          path: ViewMyInvoice-*.zip
+          if-no-files-found: error
+
+  build_unix_desktop:
+    name: Build ${{ matrix.name }}
+    needs: version
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux (linux-x64)
+            os: ubuntu-latest
+            rid: linux-x64
+            target: linux
+          - name: macOS (osx-arm64)
+            os: macos-latest
+            rid: osx-arm64
+            target: macos
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Dependencies
+        timeout-minutes: ${{ fromJSON(env.STEP_TIMEOUT_MINUTES) }}
+        uses: "./.github/steps/install_dependencies"
+        with:
+          target-platform: ${{ matrix.target }}
+
+      - name: Publish
+        run: >
+          dotnet publish ${{ env.PROJECT }} -f net10.0-desktop -c Release -r ${{ matrix.rid }}
+          --self-contained -o publish
+          -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
+          -p:ApplicationVersion=${{ github.run_number }}
+
+      - name: Package
+        run: tar -czf ViewMyInvoice-${{ needs.version.outputs.tag }}-${{ matrix.rid }}.tar.gz -C publish .
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: ${{ matrix.rid }}
+          path: ViewMyInvoice-*.tar.gz
+          if-no-files-found: error
+
+  build_wasm:
+    name: Build WebAssembly
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Dependencies
+        timeout-minutes: ${{ fromJSON(env.STEP_TIMEOUT_MINUTES) }}
+        uses: "./.github/steps/install_dependencies"
+        with:
+          target-platform: webassembly
+
+      - name: Publish
+        run: >
+          dotnet publish ${{ env.PROJECT }} -f net10.0-browserwasm -c Release -o publish
+          -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
+          -p:ApplicationVersion=${{ github.run_number }}
+
+      - name: Package
+        run: |
+          # The static site root is the wwwroot folder of the publish output
+          site=$(find publish -type d -name wwwroot | head -n 1)
+          tar -czf ViewMyInvoice-${{ needs.version.outputs.tag }}-wasm.tar.gz -C "${site:-publish}" .
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: wasm
+          path: ViewMyInvoice-*.tar.gz
+          if-no-files-found: error
+
+  build_android:
+    name: Build Android
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Dependencies
+        timeout-minutes: ${{ fromJSON(env.STEP_TIMEOUT_MINUTES) }}
+        uses: "./.github/steps/install_dependencies"
+        with:
+          target-platform: android
+
+      # Without a keystore the SDK signs with the debug keystore, which is fine for sideloading
+      # but not for the Play Store.
+      - name: Publish
+        run: >
+          dotnet publish ${{ env.PROJECT }} -f net10.0-android -c Release -o publish
+          -p:AndroidPackageFormat=apk
+          -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
+          -p:ApplicationVersion=${{ github.run_number }}
+
+      - name: Collect APK
+        run: |
+          apk=$(ls publish/*-Signed.apk | head -n 1)
+          cp "$apk" ViewMyInvoice-${{ needs.version.outputs.tag }}-android.apk
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: android
+          path: ViewMyInvoice-*.apk
+          if-no-files-found: error
+
+  release:
+    name: Approve and publish release
+    needs: [version, build_windows, build_unix_desktop, build_wasm, build_android]
+    runs-on: ubuntu-latest
+    # Configure required reviewers on this environment:
+    # Settings -> Environments -> release -> Required reviewers
+    environment: release
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Create tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.version.outputs.tag }}
+        run: |
+          ls -l artifacts
+          gh release create "$TAG" artifacts/* \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --title "$TAG" \
+            --generate-notes
