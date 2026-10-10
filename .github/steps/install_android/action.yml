@@ -1,0 +1,30 @@
+name: Install Android Dependencies
+description: "Installs .NET, a JDK and the Android workload without uno-check (which fails on Linux runners)"
+
+inputs:
+  dotnet-version:
+    description: 'Installs and sets the .NET SDK Version'
+    required: false
+    default: '10.0.x'
+  java-version:
+    description: 'JDK version used by the Android build tools'
+    required: false
+    default: '17'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup .NET ${{ inputs.dotnet-version }}
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '${{ inputs.dotnet-version }}'
+
+    - name: Setup JDK ${{ inputs.java-version }}
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: '${{ inputs.java-version }}'
+
+    - name: Install Android workload
+      shell: bash
+      run: dotnet workload install android

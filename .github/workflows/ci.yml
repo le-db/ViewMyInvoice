@@ -45,12 +45,12 @@ jobs:
 
       - name: Install Dependencies
         timeout-minutes: ${{ fromJSON(env.STEP_TIMEOUT_MINUTES) }}
-        uses: "./.github/steps/install_dependencies"
-        with:
-          target-platform: android
+        uses: "./.github/steps/install_android"
 
       - name: Build ViewMyInvoice (Android, Release)
-        run: dotnet build ./ViewMyInvoice/ViewMyInvoice.csproj -f net10.0-android -c Release
+        run: >
+          dotnet build ./ViewMyInvoice/ViewMyInvoice.csproj -f net10.0-android -c Release
+          -p:InstallAndroidDependencies=true -p:AcceptAndroidSDKLicenses=True
 
   unit_test:
     name: Unit Tests

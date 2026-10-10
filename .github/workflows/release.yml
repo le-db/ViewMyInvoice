@@ -169,15 +169,14 @@ jobs:
 
       - name: Install Dependencies
         timeout-minutes: ${{ fromJSON(env.STEP_TIMEOUT_MINUTES) }}
-        uses: "./.github/steps/install_dependencies"
-        with:
-          target-platform: android
+        uses: "./.github/steps/install_android"
 
       # Without a keystore the SDK signs with the debug keystore, which is fine for sideloading
       # but not for the Play Store.
       - name: Publish
         run: >
           dotnet publish ${{ env.PROJECT }} -f net10.0-android -c Release -o publish
+          -p:InstallAndroidDependencies=true -p:AcceptAndroidSDKLicenses=True
           -p:AndroidPackageFormat=apk
           -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
           -p:ApplicationVersion=${{ github.run_number }}
