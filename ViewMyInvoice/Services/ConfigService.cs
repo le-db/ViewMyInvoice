@@ -1,11 +1,10 @@
+using System.Collections.Concurrent;
 using System.Text.Json;
 
 namespace ViewMyInvoice.Services;
 
 public class ConfigService : IConfigService
 {
-    const string CONFIG_RESOURCE = "invoice_fields.json";
-
     static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
@@ -13,15 +12,17 @@ public class ConfigService : IConfigService
         AllowTrailingCommas = true,
     };
 
-    readonly Lazy<InvoiceFieldConfig> _config = new(Load);
+    readonly ConcurrentDictionary<string, InvoiceFieldConfig> _configs = new();
 
-    public InvoiceFieldConfig Config => _config.Value;
+    public InvoiceFieldConfig GetConfig(InvoiceSyntax syntax)
+        => _configs.GetOrAdd(syntax.Id, _ => Load(syntax));
 
-    static InvoiceFieldConfig Load()
+    static InvoiceFieldConfig Load(InvoiceSyntax syntax)
     {
-        using var stream = typeof(ConfigService).Assembly.GetManifestResourceStream(CONFIG_RESOURCE)
-            ?? throw new FileNotFoundException($"ConfigService: embedded resource '{CONFIG_RESOURCE}' not found");
+        var resource = syntax.MappingResource;
+        using var stream = typeof(ConfigService).Assembly.GetManifestResourceStream(resource)
+            ?? throw new FileNotFoundException($"ConfigService: embedded resource '{resource}' not found");
         return JsonSerializer.Deserialize<InvoiceFieldConfig>(stream, JsonOptions)
-            ?? throw new InvalidDataException($"ConfigService: '{CONFIG_RESOURCE}' is empty or invalid");
+            ?? throw new InvalidDataException($"ConfigService: '{resource}' is empty or invalid");
     }
 }

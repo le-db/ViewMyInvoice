@@ -24,4 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ViewMyInvoice\ViewMyInvoice.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ViewMyInvoice\Assets\Resources\*.xml" Link="Samples\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

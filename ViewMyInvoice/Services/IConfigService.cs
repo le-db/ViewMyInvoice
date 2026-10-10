@@ -2,5 +2,5 @@ namespace ViewMyInvoice.Services;
 
 public interface IConfigService
 {
-    InvoiceFieldConfig Config { get; }
+    InvoiceFieldConfig GetConfig(InvoiceSyntax syntax);
 }

@@ -1,0 +1,849 @@
+{
+  "Mappings": [
+    {
+      "FieldKey": "BT-10",
+      "FieldQuery": "/ubl:Invoice/cbc:BuyerReference",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-44",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-50",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-51",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-163",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-53",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-52",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-54",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-55",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-46",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-56",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-57",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-58",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-27",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-35",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-36",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-162",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-38",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-37",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-39",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-40",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-29",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-41",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Name",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-42",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telephone",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-43",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-1",
+      "FieldQuery": "/ubl:Invoice/cbc:ID",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-2",
+      "FieldQuery": "/ubl:Invoice/cbc:IssueDate",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-3",
+      "FieldQuery": "/ubl:Invoice/cbc:InvoiceTypeCode",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-5",
+      "FieldQuery": "/ubl:Invoice/cbc:DocumentCurrencyCode",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-73",
+      "FieldQuery": "/ubl:Invoice/cac:InvoicePeriod/cbc:StartDate",
+      "GroupKey": "document_period"
+    },
+    {
+      "FieldKey": "BT-74",
+      "FieldQuery": "/ubl:Invoice/cac:InvoicePeriod/cbc:EndDate",
+      "GroupKey": "document_period"
+    },
+    {
+      "FieldKey": "BT-11",
+      "FieldQuery": "/ubl:Invoice/cac:ProjectReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-12",
+      "FieldQuery": "/ubl:Invoice/cac:ContractDocumentReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-13",
+      "FieldQuery": "/ubl:Invoice/cac:OrderReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-14",
+      "FieldQuery": "/ubl:Invoice/cac:OrderReference/cbc:SalesOrderID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-25",
+      "FieldQuery": "/ubl:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-26",
+      "FieldQuery": "/ubl:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-106",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:LineExtensionAmount",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-107",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:AllowanceTotalAmount",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-108",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:ChargeTotalAmount",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-109",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-110",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cbc:TaxAmount",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-112",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-113",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:PrepaidAmount",
+      "GroupKey": "invoice_totals"
+    },
+    {
+      "FieldKey": "BT-114",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:PayableRoundingAmount",
+      "GroupKey": "invoice_totals"
+    },
+    {
+      "FieldKey": "BT-115",
+      "FieldQuery": "/ubl:Invoice/cac:LegalMonetaryTotal/cbc:PayableAmount",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-118",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-116",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-119",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-117",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxAmount",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-120",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-121",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-118",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-116",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-119",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-117",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxAmount",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-120",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-121",
+      "FieldQuery": "/ubl:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-95",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cac:TaxCategory/cbc:ID",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-93",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:BaseAmount",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-94",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:MultiplierFactorNumeric",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-92",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:Amount",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-96",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cac:TaxCategory/cbc:Percent",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-97",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:AllowanceChargeReason",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-98",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:AllowanceChargeReasonCode",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-102",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory/cbc:ID",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-100",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:BaseAmount",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-101",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:MultiplierFactorNumeric",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-99",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:Amount",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-103",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory/cbc:Percent",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-104",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:AllowanceChargeReason",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-105",
+      "FieldQuery": "/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:AllowanceChargeReasonCode",
+      "GroupKey": "allowance_charge"
+    },
+    {
+      "FieldKey": "BT-20",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentTerms/cbc:Note",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-9",
+      "FieldQuery": "/ubl:Invoice/cbc:DueDate",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-81",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cbc:PaymentMeansCode",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-82",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cbc:PaymentMeansCode/@name",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-83",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cbc:PaymentID",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-87",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:PrimaryAccountNumberID",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-88",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:HolderName",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-89",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cac:PaymentMandate/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-91",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID",
+      "GroupKey": "identifiers"
+    },
+    {
+      "FieldKey": "BT-90",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification[cbc:ID/@schemeID='SEPA']/cbc:ID",
+      "GroupKey": "identifiers"
+    },
+    {
+      "FieldKey": "BT-85",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:Name",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-84",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-86",
+      "FieldQuery": "/ubl:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID",
+      "GroupKey": "payment_information"
+    },
+    {
+      "FieldKey": "BT-22",
+      "FieldQuery": "/ubl:Invoice/cbc:Note",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-126",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cbc:ID",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-127",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cbc:Note",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-128",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:DocumentReference[cbc:DocumentTypeCode='130']/cbc:ID",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-132",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:LineID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-133",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cbc:AccountingCost",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-134",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:StartDate",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-135",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:EndDate",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-129",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cbc:InvoicedQuantity",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-130",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cbc:InvoicedQuantity/@unitCode",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-146",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceAmount",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-131",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cbc:LineExtensionAmount",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-147",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:Amount",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-148",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:BaseAmount",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-149",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Price/cbc:BaseQuantity",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-150",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Price/cbc:BaseQuantity/@unitCode",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-151",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:ID",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-152",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Percent",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-137",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:BaseAmount",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-138",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:MultiplierFactorNumeric",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-136",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:Amount",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-139",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:AllowanceChargeReason",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-140",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:AllowanceChargeReasonCode",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-142",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:BaseAmount",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-143",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:MultiplierFactorNumeric",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-141",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:Amount",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-144",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:AllowanceChargeReason",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-145",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:AllowanceChargeReasonCode",
+      "GroupKey": "invoice_line"
+    },
+    {
+      "FieldKey": "BT-153",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cbc:Name",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-154",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cbc:Description",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-155",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ID",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-156",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:BuyersItemIdentification/cbc:ID",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-160",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:Name",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-161",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:Value",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-157",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-158",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-159",
+      "FieldQuery": "/ubl:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode",
+      "GroupKey": "invoice_line_item"
+    },
+    {
+      "FieldKey": "BT-28",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-39",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-34",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:EndpointID",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-30",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-31",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/cbc:ID='VAT']/cbc:CompanyID",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-33",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-6",
+      "FieldQuery": "/ubl:Invoice/cbc:TaxCurrencyCode",
+      "GroupKey": "vat_information"
+    },
+    {
+      "FieldKey": "BT-62",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PartyName/cbc:Name",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-64",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:StreetName",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-65",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:AdditionalStreetName",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-164",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress/cac:AddressLine/cbc:Line",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-67",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:PostalZone",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-66",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:CityName",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-68",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:CountrySubentity",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-69",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-63",
+      "FieldQuery": "/ubl:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:CompanyID",
+      "GroupKey": "seller_information"
+    },
+    {
+      "FieldKey": "BT-45",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-54",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-49",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-47",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-48",
+      "FieldQuery": "/ubl:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-7",
+      "FieldQuery": "/ubl:Invoice/cbc:TaxPointDate",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-8",
+      "FieldQuery": "/ubl:Invoice/cac:InvoicePeriod/cbc:DescriptionCode",
+      "GroupKey": "tax_information"
+    },
+    {
+      "FieldKey": "BT-19",
+      "FieldQuery": "/ubl:Invoice/cbc:AccountingCost",
+      "GroupKey": "buyer_information"
+    },
+    {
+      "FieldKey": "BT-71",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:ID",
+      "GroupKey": "identifiers"
+    },
+    {
+      "FieldKey": "BT-72",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cbc:ActualDeliveryDate",
+      "GroupKey": "delivery_information"
+    },
+    {
+      "FieldKey": "BT-70",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryParty/cac:PartyName/cbc:Name",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-75",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName",
+      "GroupKey": "address_information"
+    },
+    {
+      "FieldKey": "BT-76",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName",
+      "GroupKey": "address_information"
+    },
+    {
+      "FieldKey": "BT-165",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line",
+      "GroupKey": "address_information"
+    },
+    {
+      "FieldKey": "BT-78",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone",
+      "GroupKey": "code_lists"
+    },
+    {
+      "FieldKey": "BT-77",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-79",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-80",
+      "FieldQuery": "/ubl:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode",
+      "GroupKey": "code_lists"
+    },
+    {
+      "FieldKey": "BT-17",
+      "FieldQuery": "/ubl:Invoice/cac:OriginatorDocumentReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-15",
+      "FieldQuery": "/ubl:Invoice/cac:ReceiptDocumentReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-16",
+      "FieldQuery": "/ubl:Invoice/cac:DespatchDocumentReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-23",
+      "FieldQuery": "/ubl:Invoice/cbc:ProfileID",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-24",
+      "FieldQuery": "/ubl:Invoice/cbc:CustomizationID",
+      "GroupKey": "identifiers"
+    },
+    {
+      "FieldKey": "BT-18",
+      "FieldQuery": "/ubl:Invoice/cac:AdditionalDocumentReference[cbc:DocumentTypeCode='130']/cbc:ID",
+      "GroupKey": "invoice_header"
+    },
+    {
+      "FieldKey": "BT-59",
+      "FieldQuery": "/ubl:Invoice/cac:PayeeParty/cac:PartyName/cbc:Name",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-60",
+      "FieldQuery": "/ubl:Invoice/cac:PayeeParty/cac:PartyIdentification/cbc:ID",
+      "GroupKey": "identifiers"
+    },
+    {
+      "FieldKey": "BT-61",
+      "FieldQuery": "/ubl:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyID",
+      "GroupKey": "identifiers"
+    },
+    {
+      "FieldKey": "BT-122",
+      "FieldQuery": "/ubl:Invoice/cac:AdditionalDocumentReference/cbc:ID",
+      "GroupKey": "document_references"
+    },
+    {
+      "FieldKey": "BT-123",
+      "FieldQuery": "/ubl:Invoice/cac:AdditionalDocumentReference/cbc:DocumentDescription",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-124",
+      "FieldQuery": "/ubl:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI",
+      "GroupKey": "general"
+    },
+    {
+      "FieldKey": "BT-125",
+      "FieldQuery": "/ubl:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject",
+      "GroupKey": "general"
+    }
+  ]
+}
