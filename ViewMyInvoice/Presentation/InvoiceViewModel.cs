@@ -7,26 +7,36 @@ namespace ViewMyInvoice.Presentation;
 
 public partial record InvoiceViewModel
 {
-    private readonly ILogger<InvoiceViewModel> _logger;
-    private readonly ILocalizationService _localizationService;
-    private readonly IConfigService _configService;
-    private readonly IXPathService _xPathService;
-    private readonly IDocumentService _documentService;
+    readonly ILogger<InvoiceViewModel> _logger;
+    readonly ILocalizationService _localizationService;
+    readonly IConfigService _configService;
+    readonly IStringLocalizer _localizer;
+    readonly IXPathService _xPathService;
+    readonly IDocumentService _documentService;
+    readonly ILanguageNotifier _languageNotifier;
 
     public ObservableCollection<InvoiceFieldGroup> GroupedFields { get; init; }
     public IState<CultureInfo> CurrentCulture => State<CultureInfo>
         .Value(this, () => _localizationService.CurrentCulture);
+    public IState<string> SaveLabel => State<string>
+        .Value(this, () => _localizer["SaveDocumentButton.Content"].ToString());
+    public IState<string> ViewerTitle => State<string>
+        .Value(this, () => _localizer["ViewerNavigationBar.Content"].ToString());
 
     public InvoiceViewModel(
         ILogger<InvoiceViewModel> logger,
         ILocalizationService localizationService,
         IConfigService configService,
+        IStringLocalizer localizer,
         IXPathService xPathService,
-        IDocumentService documentService)
+        IDocumentService documentService,
+        ILanguageNotifier languageNotifier)
     {
+        _languageNotifier = languageNotifier;
         _logger = logger;
         _localizationService = localizationService;
         _configService = configService;
+        _localizer = localizer;
         _xPathService = xPathService;
         _documentService = documentService;
 
@@ -36,13 +46,19 @@ public partial record InvoiceViewModel
         RegisterFieldPropertyCallbacks();
     }
 
-    public async Task ToggleLocalization()
+    public async Task ToggleLocalization(CancellationToken ct)
     {
-        var currentCulture = await CurrentCulture
-            ?? throw new NullReferenceException("InvoiceViewModel.ToggleLocalization: could not get current culture");
+        // Read the service, not the CurrentCulture state: the state is only a display copy.
+        var currentCulture = _localizationService.CurrentCulture;
         var nextCulture = _localizationService.SupportedCultures
             .First(culture => culture.Name != currentCulture.Name);
         await _localizationService.SetCurrentCultureAsync(nextCulture);
+        await CurrentCulture.UpdateAsync(_ => nextCulture, ct);
+        await SaveLabel.Set(_localizer["SaveDocumentButton.Content"].ToString(), ct);
+        await ViewerTitle.Set(_localizer["ViewerNavigationBar.Content"].ToString(), ct);
+        _languageNotifier.NotifyLanguageChanged();
+        foreach (var group in GroupedFields)
+            group.RefreshLocalization();
     }
 
     public async Task SaveDocument()
@@ -53,22 +69,23 @@ public partial record InvoiceViewModel
         await _documentService.SaveDocument(doc, docName);
     }
 
-    private IEnumerable<InvoiceFieldGroup> CreateFieldViews(IEnumerable<InvoiceField> mappings) => mappings
+    IEnumerable<InvoiceFieldGroup> CreateFieldViews(IEnumerable<InvoiceField> mappings) => mappings
         .GroupBy(m => m.GroupKey)
         .Select(g => new InvoiceFieldGroup(
-            GroupName: g.Key ?? "",
-            Fields: [.. g.Select(f => new InvoiceFieldViewModel(f, GetFieldValue(f)))]));
+            groupName: g.Key ?? "",
+            fields: [.. g.Select(f => new InvoiceFieldViewModel(f, GetFieldValue(f), _localizer))],
+            localizer: _localizer));
 
-    private void RegisterFieldPropertyCallbacks() => GroupedFields
+    void RegisterFieldPropertyCallbacks() => GroupedFields
         .ForEach((i_, g) => g.Fields.ForEach((_, f) => f.PropertyChanged += OnFieldPropertyChanged));
 
-    private string GetFieldValue(InvoiceField mapping)
+    string GetFieldValue(InvoiceField mapping)
     {
         var node = _xPathService.Select(mapping);
         return node?.InnerText ?? string.Empty;
     }
 
-    private void OnFieldPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    void OnFieldPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (sender == null || e.PropertyName != nameof(InvoiceFieldViewModel.Value))
             return;

@@ -11,9 +11,6 @@
     xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:viewmodels="using:ViewMyInvoice.Presentation"
     Background="{ThemeResource BackgroundBrush}">
-    <Page.Resources>
-        <viewmodels:LocalizeConverter x:Key="LocalizeConverter" />
-    </Page.Resources>
 
     <Grid Padding="20" utu:SafeArea.Insets="VisibleBounds">
         <Grid.RowDefinitions>
@@ -42,7 +39,7 @@
                     </Grid.ColumnDefinitions>
 
                     <utu:NavigationBar
-                        x:Uid="ViewerNavigationBar"
+                        Content="{Binding ViewerTitle}"
                         Grid.Row="0"
                         Grid.Column="0"
                         Background="Transparent" />
@@ -72,7 +69,7 @@
                                     <TextBlock
                                         FontSize="20"
                                         FontWeight="SemiBold"
-                                        Text="{Binding GroupName, Converter={StaticResource LocalizeConverter}}" />
+                                        Text="{Binding DisplayName}" />
 
                                     <!--  Fields  -->
                                     <ItemsControl ItemsSource="{Binding Fields}">
@@ -90,7 +87,7 @@
                                                         VerticalAlignment="Center"
                                                         FontWeight="SemiBold"
                                                         Opacity="0.85"
-                                                        Text="{Binding FieldInfo.FieldKey, Converter={StaticResource LocalizeConverter}, ConverterParameter=BTKey}"
+                                                        Text="{Binding Label}"
                                                         TextWrapping="Wrap" />
 
                                                     <!--  User Input  -->
@@ -114,12 +111,12 @@
 
         <!--  Footer  -->
         <Button
-            x:Uid="SaveDocumentButton"
             Grid.Row="1"
             Margin="0,10,0,0"
             Padding="24,12"
             HorizontalAlignment="Right"
             AutomationProperties.AutomationId="SaveDocumentButton"
-            Command="{Binding SaveDocument}" />
+            Command="{Binding SaveDocument}"
+            Content="{Binding SaveLabel}" />
     </Grid>
 </Page>

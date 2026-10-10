@@ -63,12 +63,12 @@ public partial class App : Application
                     configBuilder
                         .EmbeddedSource<App>()
                         .Section<AppConfig>()
-                        .Section<InvoiceFieldConfig>()
                 )
                 // Enable localization (see appsettings.json for supported languages)
                 .UseLocalization()
                 .ConfigureServices((context, services) =>
                 {
+                    services.AddSingleton<ILanguageNotifier, LanguageNotifier>();
                     services.AddSingleton<IConfigService, ConfigService>();
                     services.AddSingleton<IDocumentService, DocumentService>();
                     services.AddSingleton<IXPathService, XPathService>();
@@ -85,7 +85,7 @@ public partial class App : Application
         Host = await builder.NavigateAsync<Shell>();
     }
 
-    private static void RegisterRoutes(IViewRegistry views, IRouteRegistry routes)
+    static void RegisterRoutes(IViewRegistry views, IRouteRegistry routes)
     {
         views.Register(
             new ViewMap(ViewModel: typeof(ShellModel)),

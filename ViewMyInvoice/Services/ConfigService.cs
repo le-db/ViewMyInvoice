@@ -1,39 +1,27 @@
-using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace ViewMyInvoice.Services;
 
-public record ConfigService(ILogger<ConfigService> Logger, IConfiguration Configuration) : IConfigService
+public class ConfigService : IConfigService
 {
-    private const string CONFIG_SECTION = "InvoiceFieldConfig";
+    const string CONFIG_RESOURCE = "invoice_fields.json";
 
-    public InvoiceFieldConfig Config => Configuration
-        .GetRequiredSection(CONFIG_SECTION)
-        .Get<InvoiceFieldConfig>()!;
+    static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true,
+    };
 
+    readonly Lazy<InvoiceFieldConfig> _config = new(Load);
 
-    //private const string RESOURCES_LOCATION = "ms-appx:///Assets/Resources/";
-    //public async Task<InvoiceFieldConfig?> ConfigAsync()
-    //    => await LoadConfig($"{RESOURCES_LOCATION}/invoice_field_config.json");
+    public InvoiceFieldConfig Config => _config.Value;
 
-    //private async Task<InvoiceFieldConfig?> LoadConfig(string fileName)
-    //{
-    //    try
-    //    {
-    //        (var text, var _) = await LoadLocalFile(fileName);
-    //        return JsonConvert.DeserializeObject<InvoiceFieldConfig>(text);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Logger.LogError("DocumentService could not load XML");
-    //        Logger.LogErrorMessage(ex.Message);
-    //        return default;
-    //    }
-    //}
-
-    //private static async Task<(string text, StorageFile file)> LoadLocalFile(string fileName)
-    //{
-    //    var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"{RESOURCES_LOCATION}{fileName}"));
-    //    var text = await FileIO.ReadTextAsync(file);
-    //    return (text, file);
-    //}
+    static InvoiceFieldConfig Load()
+    {
+        using var stream = typeof(ConfigService).Assembly.GetManifestResourceStream(CONFIG_RESOURCE)
+            ?? throw new FileNotFoundException($"ConfigService: embedded resource '{CONFIG_RESOURCE}' not found");
+        return JsonSerializer.Deserialize<InvoiceFieldConfig>(stream, JsonOptions)
+            ?? throw new InvalidDataException($"ConfigService: '{CONFIG_RESOURCE}' is empty or invalid");
+    }
 }

@@ -1,13 +1,6 @@
 namespace ViewMyInvoice.Presentation;
 
-public class ShellModel
+public class ShellModel(INavigator navigator)
 {
-    private readonly INavigator _navigator;
-
-    public ShellModel(
-        INavigator navigator)
-    {
-        _navigator = navigator;
-        // Add code here to initialize or attach event handlers to singleton services
-    }
+    readonly INavigator _navigator = navigator;
 }

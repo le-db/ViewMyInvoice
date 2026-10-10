@@ -714,7 +714,4 @@
   <data name="ViewerNavigationBar.Content" xml:space="preserve">
     <value>Viewer</value>
   </data>
-  <data name="ViewerNavigationBar.Subtitle" xml:space="preserve">
-    <value>Please reload the invoice after changing the language for field labels to update</value>
-  </data>
 </root>

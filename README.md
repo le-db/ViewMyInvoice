@@ -6,7 +6,6 @@ Built with [Uno Platform](https://github.com/unoplatform/uno).
 
 ### Notes
 
-- changing language requires you to either reload the document, or restart the app
 - UBL is not supported
 - Core functionality relies on XML parsing and XPath navigation
 - After saving an edited invoice, it may not be valid anymore

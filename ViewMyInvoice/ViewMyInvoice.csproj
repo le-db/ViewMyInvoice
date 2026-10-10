@@ -39,6 +39,7 @@
   </PropertyGroup>
     <ItemGroup>
         <Content Include="Assets\Resources\*.xml" />
+        <EmbeddedResource Include="invoice_fields.json" LogicalName="invoice_fields.json" />
     </ItemGroup>
     <ItemGroup>
       <Compile Update="Presentation\InvoiceView.xaml.cs">

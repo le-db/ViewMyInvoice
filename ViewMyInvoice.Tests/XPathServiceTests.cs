@@ -6,8 +6,8 @@ namespace ViewMyInvoice.Tests;
 [TestFixture]
 public class XPathServiceTests
 {
-    private readonly XPathService _service = new();
-    private readonly XmlDocument _testDocument = new();
+    readonly XPathService _service = new();
+    readonly XmlDocument _testDocument = new();
 
     [SetUp]
     public void Setup()

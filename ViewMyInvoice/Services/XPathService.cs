@@ -5,9 +5,9 @@ namespace ViewMyInvoice.Services;
 
 public class XPathService : IXPathService
 {
-    private readonly Dictionary<InvoiceField, XmlNode> _xPathCache = [];
+    readonly Dictionary<InvoiceField, XmlNode> _xPathCache = [];
 
-    private readonly Dictionary<string, string> _namespaces = new()
+    readonly Dictionary<string, string> _namespaces = new()
     {
         { "rsm", "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100" },
         { "ram", "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100" },
@@ -20,10 +20,10 @@ public class XPathService : IXPathService
         { "ubl", "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" },
         { "xs", "http://www.w3.org/2001/XMLSchema" },
     };
-    private XmlNamespaceManager? _namespaceManager;
+    XmlNamespaceManager? _namespaceManager;
 
-    private XmlDocument? _document;
-    private string? _documentName;
+    XmlDocument? _document;
+    string? _documentName;
 
     public (XmlDocument? document, string? documentName, XmlNamespaceManager? nsManager) State
         => (_document, _documentName, _namespaceManager);
@@ -65,7 +65,7 @@ public class XPathService : IXPathService
         return node;
     }
 
-    private XmlNode? GetOrCreateNodeAtXPath(XmlDocument doc, string query)
+    XmlNode? GetOrCreateNodeAtXPath(XmlDocument doc, string query)
     {
         var node = doc.SelectSingleNode(query, _namespaceManager!);
         if (node != null)
@@ -87,7 +87,7 @@ public class XPathService : IXPathService
         return childNode;
     }
 
-    private XmlNamespaceManager GetNamespaceManager(XmlDocument document)
+    XmlNamespaceManager GetNamespaceManager(XmlDocument document)
     {
         var ns = new XmlNamespaceManager(document.NameTable);
         _namespaces.ForEach((i, kv) => ns.AddNamespace(kv.Key, kv.Value));

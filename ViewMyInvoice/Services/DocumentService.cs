@@ -6,21 +6,21 @@ namespace ViewMyInvoice.Services;
 
 public record DocumentService : IDocumentService
 {
-    private const string DEFAULT_SAVE_FILENAME = "edited_invoice.xml";
+    const string DEFAULT_SAVE_FILENAME = "edited_invoice.xml";
 
-    private readonly ILogger<DocumentService> _logger;
+    readonly ILogger<DocumentService> _logger;
 
     #region file pickers
-    private readonly Dictionary<string, IList<string>> _fileSavePickerTypes = new() {
+    readonly Dictionary<string, IList<string>> _fileSavePickerTypes = new() {
         { "XML", [ ".xml" ] },
     };
-    private readonly FileSavePicker _fileSavePicker = new()
+    readonly FileSavePicker _fileSavePicker = new()
     {
         SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
     };
 
-    private readonly IEnumerable<string> _fileOpenPickerTypes = [ ".xml" ];
-    private readonly FileOpenPicker _fileOpenPicker = new()
+    readonly IEnumerable<string> _fileOpenPickerTypes = [ ".xml" ];
+    readonly FileOpenPicker _fileOpenPicker = new()
     {
         SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
     };
@@ -63,7 +63,7 @@ public record DocumentService : IDocumentService
         }
     }
 
-    private static XmlDocument LoadXml(string text)
+    static XmlDocument LoadXml(string text)
     {
         var xml = new XmlDocument();
         xml.LoadXml(text);

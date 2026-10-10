@@ -24,9 +24,9 @@
                 VerticalAlignment="Center"
                 Spacing="16">
                 <Button
-                    x:Uid="OpenDocumentButton"
                     AutomationProperties.AutomationId="OpenDocumentButton"
-                    Command="{Binding OpenDocument}" />
+                    Command="{Binding OpenDocument}"
+                    Content="{Binding OpenLabel}" />
             </StackPanel>
         </Grid>
     </ScrollViewer>
