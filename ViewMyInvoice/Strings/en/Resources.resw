@@ -658,7 +658,7 @@
     <value>Save</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>EN16931 CII Invoice Editor</value>
+    <value>EN16931 Invoice Editor</value>
   </data>
   <data name="buyer_information" xml:space="preserve">
     <value>Buyer</value>

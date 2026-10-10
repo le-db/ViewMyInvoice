@@ -8,5 +8,5 @@ Built with [Uno Platform](https://github.com/unoplatform/uno).
 
 - UBL `CreditNote` is not supported yet; the syntax (CII or UBL Invoice) is detected from the document's root element
 - Core functionality relies on XML parsing and XPath navigation
-- After saving an edited invoice, it may not be valid anymore
+- ⚠️ After saving an edited invoice, it may not be valid anymore
 	- e.g. Schematron validation for CIUS XRechnung will fail with: Document MUST not contain empty elements.
