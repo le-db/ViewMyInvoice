@@ -8,6 +8,12 @@
     -->
     <UseDefaultPublishRuntimeIdentifier Condition="'$(TargetFramework)' == 'net10.0-android'">false</UseDefaultPublishRuntimeIdentifier>
 
+    <!--
+      Uno.Extensions persists the selected language (internal LocalizationSettings type) with reflection-based
+      System.Text.Json, which is disabled by default in trimmed builds and made the WASM language switch throw.
+    -->
+    <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
+
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
 

@@ -1,6 +1,9 @@
 <linker>
   <assembly fullname="ViewMyInvoice" />
 
+  <!-- LocalizationSettings is internal and persisted via reflection-based System.Text.Json (see csproj) -->
+  <assembly fullname="Uno.Extensions.Localization.WinUI" />
+
   <!--
   Uncomment this section when using JSON.NET
   <assembly fullname="System.Core">
