@@ -43,6 +43,16 @@
       SkiaRenderer;
     </UnoFeatures>
   </PropertyGroup>
+    <!--
+      Program.cs uses the Win32 host, so the WPF runtime is never loaded. Uno.Sdk.Extras still bundles the WPF
+      shared framework into self-contained Windows publishes and refuses to do so when cross-publishing
+      (win-x86 / win-arm64 from an x64 host). Opt out of that step.
+    -->
+    <Target Name="_ViewMyInvoiceSkipWpfBundle" AfterTargets="_DetermineUnoAddWpfToPublishDirectory">
+        <PropertyGroup>
+            <_UnoPublishWpfSelfContained></_UnoPublishWpfSelfContained>
+        </PropertyGroup>
+    </Target>
     <ItemGroup>
         <Content Include="Assets\Resources\*.xml" />
         <EmbeddedResource Include="invoice_fields.*.json" LogicalName="%(Filename)%(Extension)" />
