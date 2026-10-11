@@ -65,7 +65,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        rid: [win-x64, win-x86, win-arm64]
+        rid: [win-x64, win-arm64]
     steps:
       - uses: actions/checkout@v6
 
