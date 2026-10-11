@@ -23,6 +23,9 @@ env:
   STEP_TIMEOUT_MINUTES: 60
   PROJECT: ./ViewMyInvoice/ViewMyInvoice.csproj
 
+# Each job overrides TargetFrameworks with the one it builds: restore evaluates every framework in the
+# project, which needs workloads not installed on the runner (android on Linux) and breaks RID-specific
+# restores (no Mono runtime pack for win/osx RIDs on android/ios/wasm).
 jobs:
   version:
     name: Compute version
@@ -73,7 +76,7 @@ jobs:
       - name: Publish
         shell: pwsh
         run: >
-          dotnet publish ${{ env.PROJECT }} -f net10.0-desktop -c Release -r ${{ matrix.rid }}
+          dotnet publish ${{ env.PROJECT }} -f net10.0-desktop -p:TargetFrameworks=net10.0-desktop -c Release -r ${{ matrix.rid }}
           --self-contained -o publish
           -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
           -p:ApplicationVersion=${{ github.run_number }}
@@ -115,7 +118,7 @@ jobs:
 
       - name: Publish
         run: >
-          dotnet publish ${{ env.PROJECT }} -f net10.0-desktop -c Release -r ${{ matrix.rid }}
+          dotnet publish ${{ env.PROJECT }} -f net10.0-desktop -p:TargetFrameworks=net10.0-desktop -c Release -r ${{ matrix.rid }}
           --self-contained -o publish
           -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
           -p:ApplicationVersion=${{ github.run_number }}
@@ -144,7 +147,7 @@ jobs:
 
       - name: Publish
         run: >
-          dotnet publish ${{ env.PROJECT }} -f net10.0-browserwasm -c Release -o publish
+          dotnet publish ${{ env.PROJECT }} -f net10.0-browserwasm -p:TargetFrameworks=net10.0-browserwasm -c Release -o publish
           -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
           -p:ApplicationVersion=${{ github.run_number }}
 
@@ -175,7 +178,7 @@ jobs:
       # but not for the Play Store.
       - name: Publish
         run: >
-          dotnet publish ${{ env.PROJECT }} -f net10.0-android -c Release -o publish
+          dotnet publish ${{ env.PROJECT }} -f net10.0-android -p:TargetFrameworks=net10.0-android -c Release -o publish
           -p:InstallAndroidDependencies=true -p:AcceptAndroidSDKLicenses=True
           -p:AndroidPackageFormat=apk
           -p:ApplicationDisplayVersion=${{ needs.version.outputs.version }}
