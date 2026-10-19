@@ -62,6 +62,8 @@
     <ItemGroup>
         <Content Include="Assets\Resources\*.xml" />
         <EmbeddedResource Include="invoice_fields.*.json" LogicalName="%(Filename)%(Extension)" />
+        <EmbeddedResource Include="Strings/en/Resources.resw" LogicalName="Strings.en.resw" />
+        <EmbeddedResource Include="Strings/de/Resources.resw" LogicalName="Strings.de.resw" />
     </ItemGroup>
     <ItemGroup>
       <Compile Update="Presentation\InvoiceView.xaml.cs">

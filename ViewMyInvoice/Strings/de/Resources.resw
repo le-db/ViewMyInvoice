@@ -714,4 +714,10 @@
   <data name="ViewerNavigationBar.Content" xml:space="preserve">
     <value>Viewer</value>
   </data>
+  <data name="SearchFieldsBox.PlaceholderText" xml:space="preserve">
+    <value>Nach Name, BT-Nummer oder Feldwert suchen</value>
+  </data>
+  <data name="NoMatchingFieldsText.Text" xml:space="preserve">
+    <value>Keine Treffer</value>
+  </data>
 </root>

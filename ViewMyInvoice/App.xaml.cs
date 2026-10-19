@@ -72,6 +72,7 @@ public partial class App : Application
                     services.AddSingleton<IConfigService, ConfigService>();
                     services.AddSingleton<IDocumentService, DocumentService>();
                     services.AddSingleton<IXPathService, XPathService>();
+                    services.AddSingleton<IFieldLabelCatalog, FieldLabelCatalog>();
                 })
                 .UseNavigation(ReactiveViewModelMappings.ViewModelMappings, RegisterRoutes)
             );

@@ -14,6 +14,20 @@ public partial class InvoiceFieldGroup(
     public ObservableCollection<InvoiceFieldViewModel> Fields { get; } = fields;
     public string DisplayName => Localize(_localizer, GroupName);
 
+    [ObservableProperty]
+    bool _isVisible = true;
+
+    public void ApplyFilter(string filter)
+    {
+        bool isVisible = false;
+        foreach (var field in Fields)
+        {
+            field.IsVisible = field.Matches(filter);
+            isVisible |= field.IsVisible;
+        }
+        IsVisible = isVisible;
+    }
+
     public void RefreshLocalization()
     {
         OnPropertyChanged(nameof(DisplayName));

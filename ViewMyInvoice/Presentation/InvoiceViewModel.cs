@@ -14,14 +14,20 @@ public partial record InvoiceViewModel
     readonly IXPathService _xPathService;
     readonly IDocumentService _documentService;
     readonly ILanguageNotifier _languageNotifier;
+    readonly IFieldLabelCatalog _labelCatalog;
 
     public ObservableCollection<InvoiceFieldGroup> GroupedFields { get; init; }
+    public FieldFilter Search { get; init; }
     public IState<CultureInfo> CurrentCulture => State<CultureInfo>
         .Value(this, () => _localizationService.CurrentCulture);
     public IState<string> SaveLabel => State<string>
         .Value(this, () => _localizer["SaveDocumentButton.Content"].ToString());
     public IState<string> ViewerTitle => State<string>
         .Value(this, () => _localizer["ViewerNavigationBar.Content"].ToString());
+    public IState<string> SearchPlaceholder => State<string>
+        .Value(this, () => _localizer["SearchFieldsBox.PlaceholderText"].ToString());
+    public IState<string> NoMatchesLabel => State<string>
+        .Value(this, () => _localizer["NoMatchingFieldsText.Text"].ToString());
 
     public InvoiceViewModel(
         ILogger<InvoiceViewModel> logger,
@@ -30,9 +36,11 @@ public partial record InvoiceViewModel
         IStringLocalizer localizer,
         IXPathService xPathService,
         IDocumentService documentService,
-        ILanguageNotifier languageNotifier)
+        ILanguageNotifier languageNotifier,
+        IFieldLabelCatalog labelCatalog)
     {
         _languageNotifier = languageNotifier;
+        _labelCatalog = labelCatalog;
         _logger = logger;
         _localizationService = localizationService;
         _configService = configService;
@@ -45,6 +53,7 @@ public partial record InvoiceViewModel
         var mappings = _configService.GetConfig(syntax).Mappings
             ?? throw new NullReferenceException("InvoiceViewModel: encountered misconfigured invoice field mappings");
         GroupedFields = [ ..CreateFieldViews(mappings) ];
+        Search = new FieldFilter(GroupedFields);
         RegisterFieldPropertyCallbacks();
     }
 
@@ -58,6 +67,8 @@ public partial record InvoiceViewModel
         await CurrentCulture.UpdateAsync(_ => nextCulture, ct);
         await SaveLabel.Set(_localizer["SaveDocumentButton.Content"].ToString(), ct);
         await ViewerTitle.Set(_localizer["ViewerNavigationBar.Content"].ToString(), ct);
+        await SearchPlaceholder.Set(_localizer["SearchFieldsBox.PlaceholderText"].ToString(), ct);
+        await NoMatchesLabel.Set(_localizer["NoMatchingFieldsText.Text"].ToString(), ct);
         _languageNotifier.NotifyLanguageChanged();
         foreach (var group in GroupedFields)
             group.RefreshLocalization();
@@ -75,7 +86,7 @@ public partial record InvoiceViewModel
         .GroupBy(m => m.GroupKey)
         .Select(g => new InvoiceFieldGroup(
             groupName: g.Key ?? "",
-            fields: [.. g.Select(f => new InvoiceFieldViewModel(f, GetFieldValue(f), _localizer))],
+            fields: [.. g.Select(f => new InvoiceFieldViewModel(f, GetFieldValue(f), _localizer, _labelCatalog.GetLabels(f.FieldKey)))],
             localizer: _localizer));
 
     void RegisterFieldPropertyCallbacks() => GroupedFields

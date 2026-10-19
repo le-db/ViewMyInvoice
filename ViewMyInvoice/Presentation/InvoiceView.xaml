@@ -8,17 +8,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uen="using:Uno.Extensions.Navigation.UI"
     xmlns:um="using:Uno.Material"
+    xmlns:ut="using:Uno.Themes"
     xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:viewmodels="using:ViewMyInvoice.Presentation"
     Background="{ThemeResource BackgroundBrush}">
 
+    <Page.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+    </Page.Resources>
+
     <Grid Padding="20" utu:SafeArea.Insets="VisibleBounds">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="0">
+        <!--  Search  -->
+        <TextBox
+            Grid.Row="0"
+            Margin="20,0,20,10"
+            Padding="12,8"
+            AutomationProperties.AutomationId="SearchFieldsBox"
+            PlaceholderText="{Binding SearchPlaceholder}"
+            Text="{Binding Search.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ut:ControlExtensions.Icon>
+                <SymbolIcon Symbol="Find" />
+            </ut:ControlExtensions.Icon>
+        </TextBox>
+
+        <ScrollViewer Grid.Row="1">
             <Grid Padding="20" utu:SafeArea.Insets="VisibleBounds">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -55,6 +74,14 @@
                 </Grid>
 
                 <!--  Main Content  -->
+                <TextBlock
+                    Grid.Row="1"
+                    Margin="15,10"
+                    HorizontalAlignment="Center"
+                    Opacity="0.7"
+                    Text="{Binding NoMatchesLabel}"
+                    Visibility="{Binding Search.HasNoMatches, Converter={StaticResource BoolToVisibility}}" />
+
                 <ItemsControl Grid.Row="1" ItemsSource="{Binding GroupedFields}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -63,7 +90,8 @@
                                 Margin="0,0,0,18"
                                 Padding="20"
                                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                CornerRadius="16">
+                                CornerRadius="16"
+                                Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
 
                                 <StackPanel Spacing="16">
                                     <TextBlock
@@ -75,7 +103,7 @@
                                     <ItemsControl ItemsSource="{Binding Fields}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid Margin="0,0,0,12">
+                                                <Grid Margin="0,0,0,12" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="220" />
                                                         <ColumnDefinition Width="*" />
@@ -111,7 +139,7 @@
 
         <!--  Footer  -->
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
             Margin="0,10,0,0"
             Padding="24,12"
             HorizontalAlignment="Right"
