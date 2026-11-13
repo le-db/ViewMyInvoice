@@ -34,7 +34,6 @@ public class XPathService : IXPathService
 
     public void RegisterDocument(XmlDocument document, string documentName = "invoice.xml")
     {
-        // Detect first: an unsupported document must not disturb the currently registered one.
         var syntax = InvoiceSyntaxRegistry.Detect(document);
 
         _xPathCache.Clear();
@@ -73,7 +72,7 @@ public class XPathService : IXPathService
         return node;
     }
 
-    // [@attr='v'] or [child/path='v']; anything else is rejected when creating elements.
+    // [@attr='v'] or [child/path='v']
     static readonly Regex PredicatePattern =
         new(@"^(?<path>@[\w:]+|[\w:]+(?:/[\w:]+)*(?:/@[\w:]+)?)='(?<value>[^']*)'$");
 
@@ -91,7 +90,7 @@ public class XPathService : IXPathService
         if (parent == null)
             return null;
 
-        // Creating a predicated parent may already have created the wanted child (e.g. [cbc:ID/@schemeID='x']/cbc:ID).
+        // creating a parent may already have created the child (e.g. [cbc:ID/@schemeID='x']/cbc:ID)
         return doc.SelectSingleNode(query, _namespaceManager!) ?? CreateChild(doc, parent, steps[^1]);
     }
 
@@ -178,7 +177,7 @@ public class XPathService : IXPathService
         => _namespaceManager!.LookupNamespace(prefix)
             ?? throw new InvalidOperationException($"XPathService: unknown namespace prefix '{prefix}'");
 
-    // Reuse whatever prefix the document already uses for this namespace; fall back to the query's prefix.
+    // reuse document prefix, query prefix as fallback
     static string PrefixFor(XmlElement context, string ns, string queryPrefix)
     {
         var existing = context.GetPrefixOfNamespace(ns);
@@ -191,7 +190,7 @@ public class XPathService : IXPathService
         return colon < 0 ? ("", qualifiedName) : (qualifiedName[..colon], qualifiedName[(colon + 1)..]);
     }
 
-    // Splits an absolute location path on '/' that is not inside [...] (predicates may contain '/').
+    // split a path on '/' that is not inside [...]
     static string[] SplitSteps(string query)
     {
         var steps = new List<string>();

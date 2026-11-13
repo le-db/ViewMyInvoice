@@ -49,9 +49,9 @@ public partial record InvoiceViewModel
         _documentService = documentService;
 
         var syntax = _xPathService.Syntax
-            ?? throw new InvalidOperationException("InvoiceViewModel: no invoice document is registered");
+            ?? throw new InvalidOperationException("InvoiceViewModel: no document registered");
         var mappings = _configService.GetConfig(syntax).Mappings
-            ?? throw new NullReferenceException("InvoiceViewModel: encountered misconfigured invoice field mappings");
+            ?? throw new NullReferenceException("InvoiceViewModel: invalid invoice field mappings");
         GroupedFields = [ ..CreateFieldViews(mappings) ];
         Search = new FieldFilter(GroupedFields);
         RegisterFieldPropertyCallbacks();
@@ -59,7 +59,6 @@ public partial record InvoiceViewModel
 
     public async Task ToggleLocalization(CancellationToken ct)
     {
-        // Read the service, not the CurrentCulture state: the state is only a display copy.
         var currentCulture = _localizationService.CurrentCulture;
         var nextCulture = _localizationService.SupportedCultures
             .First(culture => culture.Name != currentCulture.Name);

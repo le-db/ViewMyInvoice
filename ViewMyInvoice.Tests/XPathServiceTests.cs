@@ -51,7 +51,7 @@ public class XPathServiceTests
         _service.RegisterDocument(_testDocument, "ubl.xml");
 
         _service.Syntax.Should().Be(InvoiceSyntaxRegistry.UblInvoice);
-        _service.Select(ciiField).Should().BeNull("the CII node must not survive in the cache");
+        _service.Select(ciiField).Should().BeNull("the CII node must not be in the cache");
     }
 
     [Test]

@@ -14,8 +14,8 @@ public class ConfigService : IConfigService
     {
         var resource = syntax.MappingResource;
         using var stream = typeof(ConfigService).Assembly.GetManifestResourceStream(resource)
-            ?? throw new FileNotFoundException($"ConfigService: embedded resource '{resource}' not found");
+            ?? throw new FileNotFoundException($"ConfigService: {resource} not found");
         return JsonSerializer.Deserialize(stream, InvoiceFieldJsonContext.Default.InvoiceFieldConfig)
-            ?? throw new InvalidDataException($"ConfigService: '{resource}' is empty or invalid");
+            ?? throw new InvalidDataException($"ConfigService: {resource} is invalid");
     }
 }

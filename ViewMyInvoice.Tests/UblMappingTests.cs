@@ -10,7 +10,6 @@ public class UblMappingTests
     static InvoiceField[] Ubl => Config.GetConfig(InvoiceSyntaxRegistry.UblInvoice).Mappings!;
     static InvoiceField[] Cii => Config.GetConfig(InvoiceSyntaxRegistry.Cii).Mappings!;
 
-    // First mapping with this FieldKey must resolve to this text in 01.10a-INVOICE_ubl.xml.
     static readonly Dictionary<string, string> ExpectedInSample = new()
     {
         ["BT-1"] = "Rechnungsnummer",

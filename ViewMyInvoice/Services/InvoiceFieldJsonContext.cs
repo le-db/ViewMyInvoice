@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ViewMyInvoice.Services;
 
-// Source-generated metadata: reflection-based System.Text.Json fails in trimmed (Release WASM) builds.
+// workaround: reflection-based System.Text.Json fails in trimmed builds (e.g. WASM)
 [JsonSourceGenerationOptions(
     PropertyNameCaseInsensitive = true,
     ReadCommentHandling = JsonCommentHandling.Skip,

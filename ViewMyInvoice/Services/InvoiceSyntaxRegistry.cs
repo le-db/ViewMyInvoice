@@ -19,8 +19,10 @@ public static class InvoiceSyntaxRegistry
         "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
         "invoice_fields.ubl-invoice.json");
 
-    // Adding a syntax (e.g. UBL CreditNote) = one entry here + one embedded mapping file.
-    public static IReadOnlyList<InvoiceSyntax> All { get; } = [Cii, UblInvoice];
+	// register syntaxes here
+    public static IReadOnlyList<InvoiceSyntax> All { get; } = [
+		Cii, UblInvoice
+	];
 
     public static InvoiceSyntax Detect(XmlDocument document)
     {

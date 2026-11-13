@@ -1,6 +1,6 @@
 namespace ViewMyInvoice.Models;
 
-/// <summary>One supported invoice XML syntax and the embedded resource holding its field mappings.</summary>
+// e.g. CII, UBL
 public partial record InvoiceSyntax(
     string Id,
     string RootName,
